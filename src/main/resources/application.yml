@@ -1,6 +1,10 @@
 spring:
   application:
     name: eureka-consumer-feign
+  rabbitmq:
+    addresses: amqp://192.168.36.129:5672
+    username:  user
+    password: 123456
 
 server:
   port: 8184
@@ -8,6 +12,16 @@ server:
 eureka:
   client:
    serviceUrl:
-    defaultZone:  http://localhost:8181/eureka/
+    defaultZone:  http://192.168.36.129:8181/eureka/
   instance:
     instance-id: ${spring.application.name}:${random.int}
+
+management:
+  endpoint:
+    health:
+      # 是否展示健康检查详情
+      show-details: always
+
+feign:
+  hystrix:
+    enabled: true
